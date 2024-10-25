@@ -43,7 +43,7 @@ endif
 
 .PHONY: grovel
 grovel: include/xev.h
-	cc -g -Wall -c grovel.c -o grovel.o -Iinclude
+	cc -g -Wall -Wextra -pedantic -std=c99 -c grovel.c -o grovel.o -Iinclude
 	cc grovel.o lib/libxev.a -o libxev-grovel
 	mkdir -p $(GROVEL_DIR)
 	./libxev-grovel > $(GROVEL_DIR)/grovel.lisp
