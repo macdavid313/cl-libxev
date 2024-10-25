@@ -6,32 +6,32 @@
 
 #+allegro
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (ff:def-foreign-call (xev-loop-init "xev_loop_init") ((loop (* xev-loop)))
+  (ff:def-foreign-call (xev-loop-init "xev_loop_init") ((lp (* xev-loop)))
     :returning :int
     :strings-convert nil
     :call-direct t
     :arg-checking nil)
 
-  (ff:def-foreign-call (xev-loop-deinit "xev_loop_deinit") ((loop (* xev-loop)))
+  (ff:def-foreign-call (xev-loop-deinit "xev_loop_deinit") ((lp (* xev-loop)))
     :returning :void
     :strings-convert nil
     :call-direct t
     :arg-checking nil)
 
-  (ff:def-foreign-call (xev-loop-run "xev_loop_run") ((loop (* xev-loop))
+  (ff:def-foreign-call (xev-loop-run "xev_loop_run") ((lp (* xev-loop))
                                                       (mode xev-run-mode-t))
     :returning :int
     :strings-convert nil
     :call-direct t
     :arg-checking nil)
 
-  (ff:def-foreign-call (xev-loop-now "xev_loop_now") ((loop (* xev-loop)))
+  (ff:def-foreign-call (xev-loop-now "xev_loop_now") ((lp (* xev-loop)))
     :returning :long-long
     :strings-convert nil
     :call-direct t
     :arg-checking nil)
 
-  (ff:def-foreign-call (xev-loop-update-now "xev_loop_update_now") ((loop (* xev-loop)))
+  (ff:def-foreign-call (xev-loop-update-now "xev_loop_update_now") ((lp (* xev-loop)))
     :returning :void
     :strings-convert nil
     :call-direct t
@@ -131,7 +131,7 @@
     :arg-checking nil)
 
   (ff:def-foreign-call (xev-timer-run "xev_timer_run") ((w (* xev-watcher))
-                                                        (loop (* xev-loop))
+                                                        (lp (* xev-loop))
                                                         (c (* xev-completion))
                                                         (next-ms :unsigned-long-long)
                                                         (userdata (* :void))
@@ -142,7 +142,7 @@
     :arg-checking nil)
 
   (ff:def-foreign-call (xev-timer-reset "xev_timer_reset") ((w (* xev-watcher))
-                                                            (loop (* xev-loop))
+                                                            (lp (* xev-loop))
                                                             (c (* xev-completion))
                                                             (c-cacnel (* xev-completion))
                                                             (next-ms :unsigned-long-long)
@@ -154,7 +154,7 @@
     :arg-checking nil)
 
   (ff:def-foreign-call (xev-timer-cancel "xev_timer_cancel") ((w (* xev-watcher))
-                                                              (loop (* xev-loop))
+                                                              (lp (* xev-loop))
                                                               (c (* xev-completion))
                                                               (c-cacnel (* xev-completion))
                                                               (userdata (* :void))
@@ -183,7 +183,7 @@
     :arg-checking nil)
 
   (ff:def-foreign-call (xev-async-wait "xev_async_wait") ((w (* xev-watcher))
-                                                          (loop (* xev-loop))
+                                                          (lp (* xev-loop))
                                                           (c (* xev-completion))
                                                           (userdata (* void))
                                                           (cb (* :void)))
