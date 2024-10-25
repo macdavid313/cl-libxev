@@ -7,12 +7,14 @@ ZIG_VERSION=0.13.0
 LIBXEV_GIT_COMMIT=b8d1d93e5c899b27abbaa7df23b496c3e6a178c7
 
 ifeq ($(shell zig version), $(ZIG_VERSION))
-$(info clang version: $(shell clang --version))
 $(info Zig version: $(ZIG_VERSION))
 $(info libxev git commit: $(LIBXEV_GIT_COMMIT))
 else
 $(error Zig version must be $(ZIG_VERSION))
 endif
+
+.PHONY: all
+all: include/xev.h lib/libxev.a
 
 libxev:
 	curl -L https://github.com/mitchellh/libxev/archive/$(LIBXEV_GIT_COMMIT).tar.gz | tar xz
@@ -43,9 +45,9 @@ else
 endif
 
 .PHONY: grovel
-grovel: include/xev.h
-	clang -Wall -Wextra -pedantic -std=c99 -c grovel.c -o grovel.o -Iinclude
-	clang grovel.o lib/libxev.a -o libxev-grovel
+grovel: include/xev.h lib/libxev.a
+	zig cc -Wall -Wextra -pedantic -std=c99 -c grovel.c -o grovel.o -Iinclude
+	zig cc grovel.o lib/libxev.a -o libxev-grovel
 	mkdir -p $(GROVEL_DIR)
 	./libxev-grovel > $(GROVEL_DIR)/grovel.lisp
 
