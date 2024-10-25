@@ -12,7 +12,7 @@
   :serial t
   :components ((:file "src/package")
                (:file "src/grovel/x86_64-linux/grovel"  :if-feature (:and :x86-64 :linux))
-               (:file "src/grovel/aarch64-linux/grovel" :if-feature (:and :arm64 :linux))
+               (:file "src/grovel/aarch64-linux/grovel" :if-feature (:and (:or :aarch64 :arm64) :linux))
                (:file "src/grovel/aarch64-macos/grovel" :if-feature (:and (:or :aarch64 :arm64) (:or :darwin :macos)))
                (:file "src/foreign/allegro" :if-feature :allegro)
                (:file "src/foreign/cffi" :if-feature (:not :allegro))
