@@ -8,7 +8,7 @@ LIBXEV_GIT_COMMIT=b8d1d93e5c899b27abbaa7df23b496c3e6a178c7
 
 ifeq ($(shell zig version), $(ZIG_VERSION))
 $(info Zig version: $(ZIG_VERSION))
-$(info linxev git commit: $(LIBXEV_GIT_COMMIT))
+$(info libxev git commit: $(LIBXEV_GIT_COMMIT))
 else
 $(error Zig version must be $(ZIG_VERSION))
 endif
