@@ -27,7 +27,7 @@ ARCH := $(shell uname -m)
 ifeq ($(OS), Linux)
 	ifeq ($(ARCH), x86_64)
 		GROVEL_DIR := src/grovel/x86_64-linux
-	else ifeq ($(ARCH), arm64)
+	else ifeq ($(ARCH), aarch64)
 		GROVEL_DIR := src/grovel/aarch64-linux
 	else
 		$(error Unsupported architecture $(ARCH) on Linux)
