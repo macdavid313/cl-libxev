@@ -6,7 +6,7 @@
   :license "MIT"
   :author "Tianyu Gu <gty@CLOS.org>"
   :maintainer "Tianyu Gu <gty@CLOS.org>"
-  :description "Common Lisp binding to libxev: a high performance, cross-platform event loop."
+  :description "Common Lisp binding for libxev: a high performance, cross-platform event loop."
   :homepage "https://github.com/macdavid313/cl-libxev"
   :depends-on #+allegro () #+(not allegro) (#:cffi)
   :serial t
