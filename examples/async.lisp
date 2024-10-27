@@ -28,12 +28,12 @@
   +XEV-DISARM+)
 
 (defun main ()
-  (with-stack-fobjects ((lp 'xev-loop)
-                        (async-c 'xev-completion)
-                        (async 'xev-watcher)
-                        (notified :char)
-                        (timer-c 'xev-completion)
-                        (timer 'xev-watcher))
+  (with-static-fobjects ((lp 'xev-loop :allocation :c)
+                         (async-c 'xev-completion :allocation :c)
+                         (async 'xev-watcher :allocation :c)
+                         (notified :char :allocation :c)
+                         (timer-c 'xev-completion :allocation :c)
+                         (timer 'xev-watcher :allocation :c))
     (unwind-protect
          (progn
            (when (not (zerop (xev-loop-init lp)))
@@ -47,7 +47,7 @@
            ;; We start a "waiter" for the async watcher. Only one waiter can
            ;; ever be set at a time. This callback will be called when the async
            ;; is notified (via xev_async_notify).
-           (setf (fslot-value notified) 0)
+           (setf (fslot-value-typed :char :c notified) 0)
            (xev-async-wait async lp async-c notified (register-foreign-callable 'async-callback))
 
            ;; Initialize a timer. The timer will fire our async.
@@ -61,7 +61,7 @@
            ;; callback this blocks forever (because the async watcher is waiting).
            (xev-loop-run lp +XEV-RUN-UNTIL-DONE+)
 
-           (when (zerop (fslot-value notified))
+           (when (zerop (fslot-value-typed :char :c notified))
              (error "FAIL! async should've been notified!")))
       ;; clean up
       (xev-timer-deinit timer)

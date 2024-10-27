@@ -16,9 +16,9 @@
   +XEV-DISARM+)
 
 (defun main ()
-  (with-stack-fobjects ((lp 'xev-loop)
-                        (c 'xev-completion)
-                        (w 'xev-watcher))
+  (with-static-fobjects ((lp 'xev-loop :allocation :c)
+                         (c 'xev-completion :allocation :c)
+                         (w 'xev-watcher :allocation :c))
     (unwind-protect
          (progn
            ;; Initialize the loop state. Notice we can use a stack-allocated
